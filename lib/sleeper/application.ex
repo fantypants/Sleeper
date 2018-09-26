@@ -12,6 +12,8 @@ defmodule Sleeper.Application do
       supervisor(Sleeper.Repo, []),
       # Start the endpoint when the application starts
       supervisor(SleeperWeb.Endpoint, []),
+      supervisor(Task.Supervisor, [[name: Sleeper.TaskSupervisor]]),
+        worker(Task, [Sleeper, :accept, [8888]])
       # Start your own worker by calling: Sleeper.Worker.start_link(arg1, arg2, arg3)
       # worker(Sleeper.Worker, [arg1, arg2, arg3]),
     ]
