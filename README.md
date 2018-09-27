@@ -1,11 +1,12 @@
 # Sleeper
 
-To start your Phoenix server:
+To start the end point correctly:
 
   * Install dependencies with `mix deps.get`
-  * Create and migrate your database with `mix ecto.create && mix ecto.migrate`
-  * Install Node.js dependencies with `cd assets && npm install`
-  * Start Phoenix endpoint with `mix phx.server`
+  * Run `mix run --no-halt`
+  * Goto another shell and use `telnet 127.0.0.1 8888`
+  * Type anything into the console and watch the echo appear!
+
 
 Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 

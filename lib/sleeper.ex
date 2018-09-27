@@ -1,21 +1,13 @@
 defmodule Sleeper do
-  @moduledoc """
-  Sleeper keeps the contexts that define your domain
-  and business logic.
-
-  Contexts are also responsible for managing your data, regardless
-  if it comes from the database, an external API or others.
-  """
   def accept(port) do
-
-  with {:ok, socket} <- :gen_tcp.listen(port,[:binary, packet: :line, active: false, reuseaddr: true]) do
-    IO.puts "Sleeper is Accepting connections on port #{port}"
-    loop_acceptor(socket)
-  else
-    {:error, :eaddrinuse} ->
-      IO.puts "Sleeper is Blocked/Busy on port Attempting 2 at #{port+1}"
-      connect_port(port+1)
-  end
+    with {:ok, socket} <- :gen_tcp.listen(port,[:binary, packet: :line, active: false, reuseaddr: true]) do
+      IO.puts "Sleeper is Accepting connections on port #{port}"
+      loop_acceptor(socket)
+    else
+      {:error, :eaddrinuse} ->
+        IO.puts "Sleeper is Blocked/Busy on port Attempting 2 at #{port+1}"
+        connect_port(port+1)
+    end
 end
 
 
@@ -36,7 +28,6 @@ end
 
 
 defp serve(client) do
-  IO.inspect client
   client
   |> read_line()
   |> write_line(client)
